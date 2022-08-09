@@ -7,16 +7,22 @@
         </el-aside>
         <el-container>
             <!-- 头部区域 -->
-            <el-header>Header</el-header>
+            <el-header>
+                <!-- 头部组件 -->
+                <common-header></common-header>
+            </el-header>
             <!-- 主内容区域 -->
-            <el-main>Main</el-main>
+            <el-main>
+                <!-- Main路由下的子路由位置 侧边栏点击后的组件显示位置-->
+                <router-view></router-view>
+            </el-main>
         </el-container>
     </el-container>
 </template>
 
 <script>
-import commonAside from '@/common/commonAside.vue'
-
+import commonAside from '@/components/common/commonAside.vue'
+import CommonHeader from '@/components/common/CommonHeader.vue'
 
 
 export default {
@@ -26,8 +32,9 @@ export default {
         }
     },
    components: {
-    commonAside
-   }
+    commonAside,
+    CommonHeader
+}
 }
 </script>
 

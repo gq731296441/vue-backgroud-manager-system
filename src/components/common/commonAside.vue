@@ -16,15 +16,17 @@
             @close="handleClose" 
             :collapse="isCollapse"
         >
+        <!-- 系统命名 -->
         <h3>通用管理系统</h3>
+
         <!-- 没有children的菜单 -->
-            <el-menu-item v-for="item in noChildren" :key="item.path" :index="item.path">
+            <el-menu-item v-for="item in noChildren" :key="item.path" :index="item.path" @click="clickMenu(item)">
                 <i :class="'el-icon-' + item.icon"></i>
                 <span slot="title">{{ item.label }}</span>
             </el-menu-item>
 
         <!-- 有子菜单的选项 -->
-            <el-submenu v-for="item in hasChildren" :key="item.path" :index="'item.path'">
+            <el-submenu v-for="item in hasChildren" :key="item.path" :index="item.path + ''">
 
                 <template slot="title">
                 <i :class="'el-icon-' + item.icon"></i>
@@ -32,7 +34,7 @@
                 </template>
 
                 <el-menu-item-group v-for="(subItem, subIndex) in item.children" :key="subItem.path">
-                    <el-menu-item :index="subIndex">{{ subItem.label }}</el-menu-item>
+                    <el-menu-item :index="subIndex + ''">{{ subItem.label }}</el-menu-item>
                 </el-menu-item-group>
 
             </el-submenu>
@@ -43,6 +45,8 @@
 </template>
 
 <script>
+// import bus from '@/eventBus.js'
+
 export default {
     data() {
       return {
@@ -93,12 +97,17 @@ export default {
       };
     },
     methods: {
-      handleOpen(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleClose(key, keyPath) {
-        console.log(key, keyPath);
-      }
+        handleOpen(key, keyPath) {
+            console.log(key, keyPath);
+        },
+        handleClose(key, keyPath) {
+            console.log(key, keyPath);
+        },
+        clickMenu (item) {
+        this.$router.push({
+            name: item.name
+        }).catch(err => {err})
+    }
     },
     computed: {
         noChildren() {
@@ -108,7 +117,12 @@ export default {
             return this.menu.filter(item => item.children)
         }
         
-    }
+    },
+    // created () {
+    //     bus.$on('asideInfo', val => {
+    //         this.isCollapse = val
+    //     })
+    // }
 }
 </script>
 
