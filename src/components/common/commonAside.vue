@@ -17,7 +17,7 @@
             :collapse="isCollapse"
         >
         <!-- 系统命名 -->
-        <h3>通用管理系统</h3>
+        <h3>{{ isCollapse ? '后台' : '通用后台管理系统' }}</h3>
 
         <!-- 没有children的菜单 -->
             <el-menu-item v-for="item in noChildren" :key="item.path" :index="item.path" @click="clickMenu(item)">
@@ -50,7 +50,7 @@
 export default {
     data() {
       return {
-        isCollapse: false,
+        // isCollapse: false,
         menu: [
             {
             path: '/',
@@ -115,6 +115,9 @@ export default {
         },
         hasChildren () {
             return this.menu.filter(item => item.children)
+        },
+        isCollapse () {
+            return this.$store.state.tab.isCollapse
         }
         
     },

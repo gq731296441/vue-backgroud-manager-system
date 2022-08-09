@@ -2,7 +2,7 @@
   <header>
       <div class="left-container">
         <!-- 左侧按钮 -->
-          <el-button icon="el-icon-menu" size="mini" plain ></el-button>
+          <el-button icon="el-icon-menu" size="mini" plain @click="handleMenu"></el-button>
           <!-- 面包屑 -->
           <h3 style="color: #fff">首页</h3>
       </div>
@@ -40,6 +40,9 @@ export default {
     //   this.isCollapse = !this.isCollapse
     //   bus.$emit('asideInfo', this.isCollapse)
     // }
+    handleMenu () {
+      this.$store.commit('collapseMenu')
+    }
   }
 }
 </script>
