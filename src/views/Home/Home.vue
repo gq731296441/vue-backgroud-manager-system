@@ -1,9 +1,9 @@
 <template>
 
   <el-row class="home">
-         <!-- 第一行 -->
+    <!-- 第一行 就一行 -->
     <el-row :gutter="20" style="margin-top: 20px">
-    <!-- 第一列  -->
+      <!-- 第一列  -->
       <el-col :span="8">
         <el-card shadow="hover">
           <div class="user">
@@ -19,7 +19,7 @@
           </div>
         </el-card>
 
-         <el-card style="margin-top: 20px; height: 460px;">
+        <el-card style="margin-top: 20px; height: 400px;">
             <el-table :data="tableData">
             <!-- 注意这里的v-for循环，循环的源数据是一个对象对象的每个属性都是一个键值对，val就表示值，key表示键 -->
               <el-table-column 
@@ -33,8 +33,10 @@
         </el-card>
 
       </el-col>
-    </el-row>
 
+      <!-- 第二列 -->
+      
+    </el-row>
   </el-row>
     
 </template>
