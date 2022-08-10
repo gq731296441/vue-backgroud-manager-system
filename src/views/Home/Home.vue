@@ -36,6 +36,7 @@
 
       <!-- 第二列 -->
       <el-col :span="16">
+        <!-- 订单数量显示 -->
         <div class="num">
           <el-card v-for="item in countData" :key="item.name" :body-style="{ display: 'flex', padding: 0 }">
             <i class="icon" :class="'el-icon-' + item.icon" :style="{ background: item.color }"></i>
@@ -43,6 +44,21 @@
               <p class="num">{{ item.value }}</p>
               <p class="txt">{{ item.name }}</p>
             </div>
+          </el-card>
+        </div>
+        <!-- 折线图 -->
+        <div>
+          <el-card style="height: 280px">
+            123
+          </el-card>
+        </div>
+        <!-- 柱状图和饼状图 -->
+        <div class="graph">
+          <el-card style="height: 260px">
+            123
+          </el-card>
+          <el-card style="height: 260px">
+            123
           </el-card>
         </div>
       </el-col>
