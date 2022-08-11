@@ -1,4 +1,4 @@
-import axios from '@/axios/axios.js'
+import axios from '@/api/axios.js'
 
 export const getMenu = (param) => {
     return axios.request({
@@ -8,4 +8,11 @@ export const getMenu = (param) => {
             param
         }
     })
+}
+
+export const getData = () => {
+    return axios.request({
+        url: '/home/getData'
+    })
+
 }

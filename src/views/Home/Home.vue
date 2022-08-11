@@ -69,7 +69,8 @@
 </template>
 
 <script>
-import { getMenu } from '@/axios/data.js'
+// import { getMenu } from '@/api/data.js'
+import { getData } from '@/api/data.js'
 
 export default {
   data() {
@@ -159,10 +160,25 @@ export default {
       ],
     }
   },
+  methods: {
+    // async getAllData () {
+    //   const { data: res } = await getData()
+    //   console.log(res);
+    // }
+  },
   created () {
-    getMenu().then(res => {
-      console.log(res);
-    })
+    // getMenu().then(res => {
+    //   console.log(res);
+    // })
+      // 获取数据
+      getData().then(res => {
+        const { code, data } = res.data
+        if (code === 20000) {
+          this.tableData = data.tableData
+        }
+        console.log(res);
+      })
+      // this.getAllData()
   }
 }
 </script>

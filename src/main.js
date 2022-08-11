@@ -9,6 +9,7 @@ import router from '@/router/index.js'
 import store from '@/store/index.js'
 
 import http from 'axios'
+import '@/api/mock.js'
 
 Vue.prototype.$http = http
 Vue.config.productionTip = false
