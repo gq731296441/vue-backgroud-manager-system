@@ -49,16 +49,19 @@
         <!-- 折线图 -->
         <div>
           <el-card style="height: 250px">
-            <div class="lingChart" style="height: 250px" ref="myLineCharts"></div>
+            <!-- <div style="height: 250px" ref="myLineCharts"></div> -->
+            <ECharts :chartData="chartData.order" style="height: 250px"></ECharts>
           </el-card>
         </div>
         <!-- 柱状图和饼状图 -->
         <div class="graph">
           <el-card style="height: 300px">
-            <div style="height: 300px" ref="userCharts"></div>
+            <!-- <div style="height: 300px" ref="userCharts"></div> -->
+            <ECharts :chartData="chartData.user" style="height: 300px"></ECharts>
           </el-card>
           <el-card style="height: 300px">
-            <div style="width: 100%; height: 260px; margin: 0; padding: 0; " ref="videoCharts"></div>
+            <!-- <div style="width: 100%; height: 260px; margin: 0; padding: 0; " ref="videoCharts"></div> -->
+            <ECharts :chartData="chartData.video" :isAxisChart="false" style="height: 300px"></ECharts>
           </el-card>
         </div>
       </el-col>
@@ -71,7 +74,11 @@
 <script>
 // import { getMenu } from '@/api/data.js'
 import { getData } from '@/api/data.js'
-import * as echarts from 'echarts'
+// import * as echarts from 'echarts'
+import ECharts from '@/components/ECharts'
+
+
+
 
 export default {
   data() {
@@ -159,6 +166,19 @@ export default {
           color: "#5ab1ef",
         },
       ],
+      chartData: {
+        order: {
+          xData: [],
+          series: []
+        },
+        user: {
+          xData: [],
+          series: []
+        },
+        video: {
+          series: []
+        }
+      }
     }
   },
   methods: {
@@ -167,6 +187,10 @@ export default {
     //   console.log(res);
     // }
   },
+  components: {
+    ECharts,
+
+},
   created () {
     // getMenu().then(res => {
     //   console.log(res);
@@ -181,7 +205,7 @@ export default {
         
         // 折线图的实现
         const order = data.orderData
-        const xData = order.date
+        // const xData = order.date
         const keyArray = Object.keys(order.data[0])
 
         // console.log(order.data);
@@ -197,62 +221,83 @@ export default {
           )
         })
 
-        const options = {
-          xAxis: {
-            data: xData
-          },
-          yAxis: {},
-          legend: {
-            data: keyArray
-          },
-          series
-        }
-        const myLineCharts = echarts.init(this.$refs.myLineCharts)
-        myLineCharts.setOption(options)
-        // console.log(options);
+        // const options = {
+        //   xAxis: {
+        //     data: xData
+        //   },
+        //   yAxis: {},
+        //   legend: {
+        //     data: keyArray
+        //   },
+        //   series
+        // }
+        // const myLineCharts = echarts.init(this.$refs.myLineCharts)
+        // myLineCharts.setOption(options)
+        this.chartData.order.xData = order.date
+        this.chartData.order.series = series
+
 
         // 柱状图的实现
-        const userOptions = {
-          legend: {
-            // 图例文字颜色
-            textStyle: {
-              color: "#333",
-            },
-            data: ['新增用户', '活跃用户']
-          },
-          grid: {
-            left: "20%",
-          },
-          // 提示框
-          tooltip: {
-            trigger: "axis",
-          },
-          xAxis: {
-            type: "category", // 类目轴
-            // 获取x轴的数据
-            data: data.userData.map(item => item.date),
-            axisLine: {
-              lineStyle: {
-                color: "#17b3a3",
-              },
-            },
-            axisLabel: {
-              interval: 0,
-              color: "#333",
-            },
-          },
-          yAxis: [
-            {
-              type: "value",
-              axisLine: {
-                lineStyle: {
-                  color: "#17b3a3",
-                },
-              },
-            },
-          ],
-          color: ["#2ec7c9", "#b6a2de"],
-          series: [
+        // const userOptions = {
+        //   legend: {
+        //     // 图例文字颜色
+        //     textStyle: {
+        //       color: "#333",
+        //     },
+        //     data: ['新增用户', '活跃用户']
+        //   },
+        //   grid: {
+        //     left: "20%",
+        //   },
+        //   // 提示框
+        //   tooltip: {
+        //     trigger: "axis",
+        //   },
+        //   xAxis: {
+        //     type: "category", // 类目轴
+        //     // 获取x轴的数据
+        //     data: data.userData.map(item => item.date),
+        //     axisLine: {
+        //       lineStyle: {
+        //         color: "#17b3a3",
+        //       },
+        //     },
+        //     axisLabel: {
+        //       interval: 0,
+        //       color: "#333",
+        //     },
+        //   },
+        //   yAxis: [
+        //     {
+        //       type: "value",
+        //       axisLine: {
+        //         lineStyle: {
+        //           color: "#17b3a3",
+        //         },
+        //       },
+        //     },
+        //   ],
+        //   color: ["#2ec7c9", "#b6a2de"],
+        //   series: [
+        //     {
+        //       name: '新增用户',
+        //       type: 'bar',
+        //       data: data.userData.map(item => item.new)
+        //     },
+        //     {
+        //       name: '活跃用户',
+        //       type: 'bar',
+        //       data: data.userData.map(item => item.active)
+
+        //     }
+        //   ],
+        // }
+
+        // const userChart = echarts.init(this.$refs.userCharts)
+        // userChart.setOption(userOptions)
+
+        this.chartData.user.xData = data.userData.map(item => item.date)
+        this.chartData.user.series = [
             {
               name: '新增用户',
               type: 'bar',
@@ -262,38 +307,40 @@ export default {
               name: '活跃用户',
               type: 'bar',
               data: data.userData.map(item => item.active)
-
             }
-          ],
-        }
-
-        const userChart = echarts.init(this.$refs.userCharts)
-        userChart.setOption(userOptions)
+        ]
 
         // 饼状图的实现
-        const videoOptions = {
-          tooltip: {
-            trigger: "item",
-          },
-          color: [
-            "#0f78f4",
-            "#dd536b",
-            "#9462e5",
-            "#a6a6a6",
-            "#e1bb22",
-            "#39c362",
-            "#3ed1cf",
-          ],
-          series: [
+        // const videoOptions = {
+        //   tooltip: {
+        //     trigger: "item",
+        //   },
+        //   color: [
+        //     "#0f78f4",
+        //     "#dd536b",
+        //     "#9462e5",
+        //     "#a6a6a6",
+        //     "#e1bb22",
+        //     "#39c362",
+        //     "#3ed1cf",
+        //   ],
+        //   series: [
+        //     {
+        //       type: 'pie',
+        //       data: data.videoData
+        //     }
+        //   ],
+        // }
+
+        // const videoCharts = echarts.init(this.$refs.videoCharts)
+        // videoCharts.setOption(videoOptions)
+
+        this.chartData.video.series = [
             {
               type: 'pie',
               data: data.videoData
             }
-          ],
-        }
-
-        const videoCharts = echarts.init(this.$refs.videoCharts)
-        videoCharts.setOption(videoOptions)
+        ]
 
       })
 
