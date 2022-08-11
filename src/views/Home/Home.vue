@@ -69,6 +69,8 @@
 </template>
 
 <script>
+import { getMenu } from '@/axios/data.js'
+
 export default {
   data() {
     return {
@@ -156,6 +158,11 @@ export default {
         },
       ],
     }
+  },
+  created () {
+    getMenu().then(res => {
+      console.log(res);
+    })
   }
 }
 </script>
