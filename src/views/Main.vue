@@ -40,11 +40,11 @@ export default {
 
 <style lang="less" scoped>
     .el-container {
-        height: 100%;
+        height: 100vh;
     }
 
     .el-aside {
-        height: 100%;
+        height: 100vh;
     }
 
     .el-header {
@@ -54,5 +54,6 @@ export default {
 
     .el-main {
         padding-top: 0;
+        // overflow: hidden;
     }
 </style>

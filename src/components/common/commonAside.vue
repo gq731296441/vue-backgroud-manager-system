@@ -137,10 +137,9 @@ export default {
 
     .myMenu {
         height: 100vh;
-    }
 
-    .el-menu {
-        height: 100%;
+        .el-menu {
+        height: 100vh;
         border: none;
 
         h3 {
@@ -150,5 +149,8 @@ export default {
         }
 
     }
+    }
+
+   
 
 </style>
