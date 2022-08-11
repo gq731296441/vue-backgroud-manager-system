@@ -49,7 +49,7 @@
         <!-- 折线图 -->
         <div>
           <el-card style="height: 280px">
-            123
+            <div class="lingChart" style="height: 280px" ref="myLineCharts"></div>
           </el-card>
         </div>
         <!-- 柱状图和饼状图 -->
@@ -71,6 +71,7 @@
 <script>
 // import { getMenu } from '@/api/data.js'
 import { getData } from '@/api/data.js'
+import * as echarts from 'echarts'
 
 export default {
   data() {
@@ -172,11 +173,43 @@ export default {
     // })
       // 获取数据
       getData().then(res => {
+        // 获取表格中的数据
         const { code, data } = res.data
         if (code === 20000) {
           this.tableData = data.tableData
         }
-        console.log(res);
+
+        const order = data.orderData
+        const xData = order.date
+        const keyArray = Object.keys(order.data[0])
+
+        const series = []
+
+        keyArray.forEach(key => {
+          series.push(
+            {
+              name: key,
+              type: 'line',
+              data: order.data.map(item => item[key])
+            }
+          )
+        })
+
+        const options = {
+          xAxis: {
+            data: xData
+          },
+          yAxis: {},
+          legend: {
+            data: keyArray
+          },
+          series
+        }
+
+        const myLineCharts = echarts.init(this.$refs.myLineCharts)
+        myLineCharts.setOption(options)
+        console.log(options);
+
       })
       // this.getAllData()
   }
