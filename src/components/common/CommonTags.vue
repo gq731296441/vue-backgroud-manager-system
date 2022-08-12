@@ -49,11 +49,13 @@ export default {
             if (tag.name !== this.$route.name) {
                 return
             }
+            // 如果点击的最后一个，且是当前路由的tag，就将路由向左边临近的tag跳转
             if (index === length) {
                 this.$router.push({
                     name: this.tabList[index - 1].name
                 })
             }else {
+                // 如果当点击的是中间的tag，且是当前路由的tag，就向右边临近的tag跳转
                 this.$router.push({
                     name: this.tabList[index].name
                 })
