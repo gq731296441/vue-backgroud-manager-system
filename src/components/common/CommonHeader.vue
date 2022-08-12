@@ -4,7 +4,10 @@
         <!-- 左侧按钮 -->
           <el-button icon="el-icon-menu" size="mini" plain @click="handleMenu"></el-button>
           <!-- 面包屑 -->
-          <h3 style="color: #fff">首页</h3>
+          <!-- <h3 style="color: #fff">首页</h3> -->
+          <el-breadcrumb separator="/">
+            <el-breadcrumb-item v-for="item in tabList" :key="item.path" :to="{ path: item.path }">{{ item.label }}</el-breadcrumb-item>
+          </el-breadcrumb>
       </div>
 
       <div class="right-container">
@@ -27,6 +30,7 @@
 
 <script>
 // import bus from '@/eventBus.js'
+import { mapState } from 'vuex';
 
 export default {
   data () {
@@ -43,6 +47,14 @@ export default {
     handleMenu () {
       this.$store.commit('collapseMenu')
     }
+  },
+  computed: {
+    ...mapState({
+      tabList: state => state.tab.tabList
+    }),
+  },
+  created () {
+    // console.log(this.$store.state);
   }
 }
 </script>
@@ -62,6 +74,7 @@ header {
     .el-button {
       margin-right: 20px;
     }
+
   }
 
   .right-container {

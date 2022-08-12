@@ -33,8 +33,8 @@
                 <span slot="title">{{ item.label }}</span>
                 </template>
 
-                <el-menu-item-group v-for="(subItem, subIndex) in item.children" :key="subItem.path">
-                    <el-menu-item :index="subIndex + ''">{{ subItem.label }}</el-menu-item>
+                <el-menu-item-group v-for="subItem in item.children" :key="subItem.path" >
+                    <el-menu-item :index="subItem.path" @click="clickMenu(subItem)">{{ subItem.label }}</el-menu-item>
                 </el-menu-item-group>
 
             </el-submenu>
@@ -104,10 +104,10 @@ export default {
             console.log(key, keyPath);
         },
         clickMenu (item) {
-        this.$router.push({
-            name: item.name
-        }).catch(err => {err})
-    }
+            this.$router.push({name: item.name}).catch(err => {err})
+            // 面包屑： 将点击的当前菜单的属性送入vuex的模块中
+            this.$store.commit('selectMenu', item)
+        }
     },
     computed: {
         noChildren() {
