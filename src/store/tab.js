@@ -33,7 +33,13 @@ export default {
                 // 如果还是点击的还是home，就重置currentMenu
                 state.currentMenu = null
             }
-            console.log(state.tabList);
+            // console.log(state.tabList);
+        },
+        closeTag (state, val) {
+            // 查找与传入的tab项的name相同的元素的index
+            const result = state.tabList.findIndex(item => item.name === val.name)
+            // 删除state中的tabList的该元素 
+            state.tabList.splice(result, 1)
         }
 
     }

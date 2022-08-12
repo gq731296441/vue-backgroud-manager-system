@@ -11,6 +11,10 @@
                 <!-- 头部组件 -->
                 <common-header></common-header>
             </el-header>
+
+            <!-- tag区域 -->
+            <common-tags></common-tags>
+
             <!-- 主内容区域 -->
             <el-main>
                 <!-- Main路由下的子路由位置 侧边栏点击后的组件显示位置-->
@@ -23,18 +27,23 @@
 <script>
 import commonAside from '@/components/common/commonAside.vue'
 import CommonHeader from '@/components/common/CommonHeader.vue'
+import CommonTags from '@/components/common/CommonTags.vue'
 
 
 export default {
-    dtat() {
+    data () {
         return {
 
         }
     },
-   components: {
-    commonAside,
-    CommonHeader
-}
+    components: {
+        commonAside,
+        CommonHeader,
+        CommonTags,
+    },
+    created () {
+        
+    }
 }
 </script>
 
