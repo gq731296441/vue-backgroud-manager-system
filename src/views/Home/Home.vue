@@ -73,6 +73,7 @@
 
 <script>
 // import { getMenu } from '@/api/data.js'
+// 从封装好的axios中导入对应的请求函数
 import { getData } from '@/api/data.js'
 // import * as echarts from 'echarts'
 import ECharts from '@/components/ECharts'
