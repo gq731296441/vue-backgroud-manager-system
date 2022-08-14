@@ -137,7 +137,7 @@ export default {
    * @return {{code: number, data: {message: string}}}
    */
   updateUser: config => {
-    console.log(config);
+    // console.log(config);
     const { id, name, addr, age, birth, sex } = JSON.parse(config.body)
     const sex_num = parseInt(sex)
     List.some(u => {

@@ -13,13 +13,13 @@
       <el-input
         v-if="item.type == 'input'"
         :placeholder="'请输入' + item.label"
-        v-model="formData[item.model]"
+        v-model="form[item.model]"
       >
       </el-input>
         <!-- 如果是switch表单元素 设置占位符、双向绑定model值 -->
       <el-switch
         v-if="item.type === 'switch'"
-        v-model="formData[item.model]"
+        v-model="form[item.model]"
       ></el-switch>
         <!-- 如果是日期选择的表单元素，要设置日期格式，占位符、双向绑定model值 -->
       <el-date-picker
@@ -27,13 +27,13 @@
         type="date"
         value-format="yyyy-MM-dd"
         placeholder="选择日期"
-        v-model="formData[item.model]"
+        v-model="form[item.model]"
       ></el-date-picker>
         <!-- 如果是下拉选项表单元素，设置占位符、双向绑定model值 -->
       <el-select
         v-if="item.type === 'select'"
         placeholder="请选择"
-        v-model="formData[item.model]"
+        v-model="form[item.model]"
       >
         <!-- 循环渲染下拉选项， -->
         <el-option
@@ -64,7 +64,7 @@ export default {
   },
   data() {
     return {
-
+      testData: this.form
     };
   },
   computed: {
@@ -78,9 +78,6 @@ export default {
       return this.inline
     }
   },
-  created () {
-
-  }
 
 };
 </script>

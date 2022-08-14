@@ -44,6 +44,7 @@
       @edit="editUser"
       @del="delUser"
     ></common-table>
+
   </div>
 </template>
 
@@ -52,13 +53,14 @@ import CommonForm from "@/components/common/CommonForm.vue";
 import CommonTable from "@/components/common/CommonTable.vue";
 import{ getUser } from '@/api/data.js'
 
+
 export default {
   name: "user",
   data() {
     return {
       operateType: "add",
       isShow: false,
-      // 新增和编辑表单的元素列表
+      // 新增和编辑表单的表单元素配置
       operateFormLabel: [
         {
           model: "name",
@@ -96,7 +98,7 @@ export default {
           type: "input",
         },
       ],
-      // 新怎和编辑表单的数据
+      // 新增和编辑表单的数据
       operateForm: {
         name: "",
         addr: "",
@@ -104,7 +106,8 @@ export default {
         birth: "",
         sex: "",
       },
-      // 搜索的表单列表
+
+      // 搜索的表单的配置
       searchLabel: [
         {
           model: 'keyword',
@@ -116,7 +119,10 @@ export default {
       searchData: {
         keyword: ''
       },
+
+      // 表格的总数据
       tableData: [],
+      // 表格每列的的prop和label以及宽度width
       tableLabel: [
         {
           prop: 'name',
@@ -145,10 +151,12 @@ export default {
         },
 
       ],
+      // 换页插件 的 当前页数 和 总页数
       config: {
         page: 1,
         total: 30
       },
+
     };
   },
   components: { CommonForm, CommonTable },
@@ -189,36 +197,44 @@ export default {
       }
     },
     // 获取用户的数据
+    // 该函数接收name作为参数，默认name为空
     getList (name = '') {
       this.config.loading = true
+      // 如果传进来的name参数不为空，那么就从第一页开始搜索，否则啥也不做
       name ? (this.config.page = 1) : ''
+      // 通过封装的axios中的getUser函数发起get请求获取用户列表
+      // 获取用户列表可以带参数 name, page, limt; name可以不填, page,limit有默认值。
+      // 即 如果有名字就从数据的第一页开始查询并返回，如果没有就获取所有的数据返回
       getUser({
         name,
         page: this.config.page
       }).then(res => {
-          // console.log(res);
+          // 返回的数据:状态码code: number, 数据总数count: number, 数据data: *[]
+          // 因为数据㕜的sex是通过0和1进行区分，0为女，1为男
+          // 因此将返回的数据通过map方法重新生成新的数据,将01换为男女性别
+          // 将新的数组赋值给data中的表格数据
           this.tableData = res.data.list.map(item => {
             item.sexLabel = item.sex === 0 ? '女' : '男'
             return item
           })
           // console.log(this.tableData);
+          // 数据总数
           this.config.total = res.data.count
           this.config.loading = false
       })
     },
+
     editUser (row) {
       console.log(row.name);
       // console.log(this.operateForm.name);
       this.operateType = 'edit'
       this.isShow = true
       this.operateForm = row
-
-
     },
     delUser (row) {
       this.$confirm("此操作将永久删除该文件，是否继续？", "提示", {
         confirmButtonText: '确认',
-        confirmButtonText: '取消',
+        cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
         const id = row.id
@@ -234,9 +250,6 @@ export default {
           this.getList()
         })
       })
-
-
-
     }
   },
   created () {
