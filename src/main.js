@@ -15,6 +15,7 @@ Vue.prototype.$http = http
 Vue.config.productionTip = false
 Vue.use(ElementUI)
 
+
 new Vue({
   store,
   render: h => h(App),
