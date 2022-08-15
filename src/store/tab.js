@@ -89,7 +89,7 @@ export default {
 
             // console.log(menuArray);
 
-            // 路由动态添加
+            // 路由动态添加，将路由数组中的路由依次添加到路由的Main下面
             menuArray.forEach(item => {
                 router.addRoute('Main', item)
             })

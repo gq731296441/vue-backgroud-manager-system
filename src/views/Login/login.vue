@@ -76,13 +76,17 @@ export default {
 
             // 将登录的suername和密码通过post发送到后端
             getMenu(this.form).then(({ data: res }) => {
-                // console.log(res);
+                // 如果请求成功
                 if (res.code === 20000) {
+                    // 首先清除存储的已有的菜单
                     this.$store.commit('clearMenu')
+                    // 重新设置接口返回的菜单
                     this.$store.commit('setMenu', res.data.menu)
                     // 拿到后端返回的token并存储
                     this.$store.commit('setToken', res.data.token)
+                    // 根据菜单重新设置路由规则
                     this.$store.commit('addMenu', this.$router)
+                    // 跳转到home页面
                     this.$router.push({name: 'home'})
                 }else{
                     // 使用elementui的￥message抛出异常
