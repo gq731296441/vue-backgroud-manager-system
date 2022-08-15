@@ -1,9 +1,10 @@
 import Mock from 'mockjs'
 export default {
   getMenu: config => {
-    console.log(config);
+    // console.log(config);
     const { username, password } = JSON.parse(config.body)
-    console.log(JSON.parse(config.body))
+    // console.log(JSON.parse(config.body))
+    // console.log(username, password);
     // 先判断用户是否存在
     // 判断账号和密码是否对应
     if (username === 'admin' && password === 'admin') {
@@ -41,14 +42,14 @@ export default {
                   name: 'page1',
                   label: '页面1',
                   icon: 'setting',
-                  url: 'Other/PageOne'
+                  url: 'other/pageOne'
                 },
                 {
                   path: '/page2',
                   name: 'page2',
                   label: '页面2',
                   icon: 'setting',
-                  url: 'Other/PageTwo'
+                  url: 'other/pageTwo'
                 }
               ]
             }
@@ -70,11 +71,11 @@ export default {
               url: 'Home/Home'
             },
             {
-              path: '/video',
-              name: 'video',
+              path: '/mall',
+              name: 'mall',
               label: '商品管理',
               icon: 'video-play',
-              url: 'VideoManage/VideoManage'
+              url: 'Mall/Mall'
             }
           ],
           token: Mock.Random.guid(),

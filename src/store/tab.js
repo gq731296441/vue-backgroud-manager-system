@@ -1,3 +1,6 @@
+import router from '@/router'
+import Cookie from 'js-cookie'
+
 export default {
     state: {
         isCollapse: false,
@@ -11,7 +14,8 @@ export default {
         ],
         // 控制高亮显示
         currentMenu: null,
-        x: 2
+        // 存储菜单的数组
+        menu: []
     },
     mutations: {
         collapseMenu(state) {
@@ -40,6 +44,50 @@ export default {
             const result = state.tabList.findIndex(item => item.name === val.name)
             // 删除state中的tabList的该元素 
             state.tabList.splice(result, 1)
+        },
+        //  存储请求接口返回的菜单数组
+        setMenu (state, val) {
+            state.menu = val
+            // 存在cookie中是为了防止刷新页面，导致vuex中的store数据丢失
+            Cookie.set('menu', JSON.stringify(val))
+        },
+        // 清空存储的菜单
+        clearMenu (state) {
+            state.menu = []
+            Cookie.remove('menu')
+        },
+        // 将存储好的menu菜单数组添加到router路由中
+        addMenu (state, router) {
+            // 从Cookie中获取菜单，如果没有就直接返回
+            // 如果Cookie中有菜单，就将其更新到state中
+            if (!Cookie.get('menu')) {
+                return 
+            }
+            const menu = JSON.parse(Cookie.get('menu'))
+            state.menu = menu
+            
+            // 定义一个空路由
+            const menuArray = []
+            
+            menu.forEach(item => {
+                if (item.children) {
+                    item.children = item.children.map(item => {
+                        item.component = () => import(`@/views/${item.url}`)
+                        return item
+                    })
+                    menuArray.push(...item.children)
+                }else {
+                    item.component = () => import(`@/views/${item.url}`)
+                    menuArray.push(item)
+                }
+            })
+
+            // console.log(menuArray);
+
+            // 路由动态添加
+            menuArray.forEach(item => {
+                router.addRoute('Main', item)
+            })
         }
 
     }

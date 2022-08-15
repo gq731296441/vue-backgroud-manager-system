@@ -1,12 +1,11 @@
 import axios from '@/api/axios.js'
 
-export const getMenu = (param) => {
+//访问安县，不同用户对应不同的菜单
+export const getMenu = (params) => {
     return axios.request({
         url: '/permisson/getMenu',
         method: 'post',
-        data: {
-            param
-        }
+        data: params
     })
 }
 

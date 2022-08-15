@@ -42,7 +42,7 @@ export default {
         CommonTags,
     },
     created () {
-        
+
     }
 }
 </script>

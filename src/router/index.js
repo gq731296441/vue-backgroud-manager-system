@@ -41,6 +41,7 @@ const routes = [
             }
         ]
     },
+
     {
         path: '/login',
         name: 'login',
@@ -58,14 +59,17 @@ router.beforeEach((to, from, next) => {
     // 获取token，防止页面刷新导致state中的token丢失
     store.commit('getToken')
     const token = store.state.user.token
+    // 如果没有token并且访问的不是login，那么都跳转到login
     if (!token && to.name !== 'login') {
         next({name: 'login'})
-    }else {
+    } else if (token && to.name === 'login') {
+        next({name: 'home'})
+    } else {
         next()
     }
-  
-  })
+})
   
 
 
 export default router
+

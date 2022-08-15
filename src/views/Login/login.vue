@@ -48,7 +48,8 @@
 </template>
 
 <script>
-import Mock from 'mockjs'
+// import Mock from 'mockjs'
+import { getMenu } from '@/api/data.js'
 
 export default {
     name: 'login',
@@ -68,9 +69,26 @@ export default {
     },
     methods: {
         login () {
-            const token = Mock.Random.guid()
-            this.$store.commit('setToken', token)
-            this.$router.push({name: 'home'})
+            // 模拟token
+            // const token = Mock.Random.guid()
+            // this.$store.commit('setToken', token)
+            // this.$router.push({name: 'home'})
+
+            // 将登录的suername和密码通过post发送到后端
+            getMenu(this.form).then(({ data: res }) => {
+                // console.log(res);
+                if (res.code === 20000) {
+                    this.$store.commit('clearMenu')
+                    this.$store.commit('setMenu', res.data.menu)
+                    // 拿到后端返回的token并存储
+                    this.$store.commit('setToken', res.data.token)
+                    this.$store.commit('addMenu', this.$router)
+                    this.$router.push({name: 'home'})
+                }else{
+                    // 使用elementui的￥message抛出异常
+                    this.$message.warning(res.data.message)
+                }
+            })
         }
     }
 }
