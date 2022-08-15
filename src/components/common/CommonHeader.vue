@@ -20,7 +20,7 @@
           <!-- 下拉菜单 -->
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item>个人中心</el-dropdown-item>
-            <el-dropdown-item>退出</el-dropdown-item>
+            <el-dropdown-item @click.native="logOut">退出</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </div>
@@ -46,6 +46,11 @@ export default {
     // }
     handleMenu () {
       this.$store.commit('collapseMenu')
+    },
+    logOut () {
+      this.$store.commit('removeToken')
+      this.$store.commit('clearMenu')
+      this.$router.push({name: 'login'})
     }
   },
   computed: {

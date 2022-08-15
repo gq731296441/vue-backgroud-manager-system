@@ -63,20 +63,25 @@ export default {
             if (!Cookie.get('menu')) {
                 return 
             }
+            // Cookie中只能存放字符串，需要通过JSOn将字符串转为对象
             const menu = JSON.parse(Cookie.get('menu'))
             state.menu = menu
             
-            // 定义一个空路由
+            // 定义一个空路由数组，将会根据返回的menu创建一个新的路由菜单
             const menuArray = []
             
             menu.forEach(item => {
+                // 如果是带有子菜单的菜单
                 if (item.children) {
+                    // 就将子菜单的component绑定为带有动态导入的import
+                    // import的链接是使用menu菜单中的每个对象下的url链接
                     item.children = item.children.map(item => {
                         item.component = () => import(`@/views/${item.url}`)
                         return item
                     })
                     menuArray.push(...item.children)
                 }else {
+                    // 如果没有子菜单，就将这些菜单的component替换为动态导入
                     item.component = () => import(`@/views/${item.url}`)
                     menuArray.push(item)
                 }
