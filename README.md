@@ -1,24 +1,25 @@
-# vue-manager
+#后台管理系统
 
-## Project setup
-```
-yarn install
-```
+## 登录和登出
+输入正确的账号密码以登录系统，不同的用户对应展示不同的页面
+管理员登录账号和密码为 admin
+普通用户登录账号和密码为 yonghu
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+点击左上角的用户头像，可呼出下拉菜单，退出选项可以实现登出功能
 
-### Compiles and minifies for production
-```
-yarn build
-```
 
-### Lints and fixes files
-```
-yarn lint
-```
+## 管理系统结构
+包含首页 商品管理 用户管理 以及其他等页面
+
+### 侧边栏菜单
+通过点击侧边栏菜单可以切换不同的页面，同时对应系统Header区域的面包屑的变换，以及主页面的tag标签的变换
+
+### 首页
+首页包含管理员的个人信息，包括登录的时间和地点，可以展示本月的订单数量，以及本月收藏的订单的数量。同时使用ECharts组件下的图表来展示每月数据的折线图、柱状图以及饼状。
+
+### 用户页面
+用户页面实现后端用户数据的分页展示功能，每个用户都有对应的编辑和删除功能，以及表格有新增用户的功能，还有搜索对应用户的功能。
+
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
