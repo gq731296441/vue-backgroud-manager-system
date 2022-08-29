@@ -124,7 +124,7 @@ export default {
           }
         ],
       tableLabel: {
-        name: '课程',
+        name: '品牌',
         todayBuy: '今日购买',
         monthBuy: '本月购买',
         totalBuy: '总购买'
