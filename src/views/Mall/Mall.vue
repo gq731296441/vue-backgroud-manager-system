@@ -68,7 +68,7 @@ export default {
         {
           prop: 'goodsName',
           label: '订单名称',
-          width: 200
+          width: 100
         },
         {
           prop: 'goodsCount',
