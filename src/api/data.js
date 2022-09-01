@@ -32,6 +32,14 @@ export const getUser = (params) => {
     })
 }
 
+export const getGoods = (params) => {
+    return axios.request({
+        url: 'mall/getGoods',
+        method: 'GEt',
+        params
+    })
+}
+
 export const getCode = (params) => {
     return axios.request({
         url: 'permisson/getCode',

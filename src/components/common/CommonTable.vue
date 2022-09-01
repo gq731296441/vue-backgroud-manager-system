@@ -3,9 +3,11 @@
     <!-- 声明el-table -->
     <el-table
         :data="tableData"
-        style="height: 80vh"
+        style="width: 100%;"
+        height="250"
         stripe
     >
+        <slot></slot>
         <!-- 循环渲染table的每一列 -->
         <el-table-column
             show-overflow-tooltip
@@ -45,7 +47,7 @@
         :total="config.total"
         :current-page.sync="config.page"
         @current-change="changePage"
-        :page-size="20"
+        :page-size="config.page_size"
     ></el-pagination>
   </div>
 </template>
@@ -76,7 +78,7 @@ export default {
         // current-change事件触发时传入当前页的页数
         changePage (page) {
             this.$emit('changePage', page)
-            console.log(page);
+            console.log('当前页数', page);
         }
     },
     created () {
@@ -88,7 +90,7 @@ export default {
 <style lang="less" scoped>
 .common-table {
     // height: 90vh;
-    height: 90vh;
+    height: 100vh;
     background-color: #fff;
     position: relative;
     

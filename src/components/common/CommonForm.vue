@@ -16,11 +16,13 @@
         v-model="form[item.model]"
       >
       </el-input>
+
         <!-- 如果是switch表单元素 设置占位符、双向绑定model值 -->
       <el-switch
         v-if="item.type === 'switch'"
         v-model="form[item.model]"
       ></el-switch>
+
         <!-- 如果是日期选择的表单元素，要设置日期格式，占位符、双向绑定model值 -->
       <el-date-picker
         v-if="item.type === 'date'"
@@ -29,6 +31,8 @@
         placeholder="选择日期"
         v-model="form[item.model]"
       ></el-date-picker>
+
+
         <!-- 如果是下拉选项表单元素，设置占位符、双向绑定model值 -->
       <el-select
         v-if="item.type === 'select'"
@@ -43,7 +47,9 @@
           :value="item.value"
         ></el-option>
       </el-select>
+
     </el-form-item>
+
     <!-- 预留一个插槽，存放自定义的内容 -->
     <el-form-item><slot></slot></el-form-item>
   </el-form>

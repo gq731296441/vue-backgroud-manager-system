@@ -14,11 +14,13 @@
         :form="operateForm" 
         :inline="true"
       ></common-form>
+
       <!-- 对话框的下方按钮， 分别是取消和确认 取消通过修改isShow控制对话框的可见性-->
       <div slot="footer" class="dialog-footer">
         <el-button @click="cancle">取消</el-button>
         <el-button type="primary" @click="confirm">确定</el-button>
       </div>
+
     </el-dialog>
     
     <!-- 用户列表上方的按钮，新增和搜索框 -->
@@ -34,6 +36,7 @@
       <!-- 搜索按钮，点击触发getList函数 放置在插槽中-->
       <el-button type="primary" @click="getList(searchData.keyword)">搜索</el-button>
       </common-form>
+
     </div>
 
     <common-table
@@ -127,7 +130,6 @@ export default {
         {
           prop: 'name',
           label: '姓名',
-
         },
         {
           prop: 'addr',
@@ -154,6 +156,7 @@ export default {
       // 换页插件 的 当前页数 和 总页数
       config: {
         page: 1,
+        page_size: 10,
         total: 30
       },
 
@@ -196,6 +199,7 @@ export default {
         sex: "",
       }
     },
+
     // 获取用户的数据
     // 该函数接收name作为参数，默认name为空
     getList (name = '') {
@@ -209,6 +213,7 @@ export default {
         name,
         page: this.config.page
       }).then(res => {
+          console.log('1');
           // 返回的数据:状态码code: number, 数据总数count: number, 数据data: *[]
           // 因为数据㕜的sex是通过0和1进行区分，0为女，1为男
           // 因此将返回的数据通过map方法重新生成新的数据,将01换为男女性别
@@ -232,7 +237,7 @@ export default {
       this.operateForm = row
     },
     delUser (row) {
-      this.$confirm("此操作将永久删除该文件，是否继续？", "提示", {
+      this.$confirm("此操作将永久删除该用户，是否继续？", "提示", {
         confirmButtonText: '确认',
         cancelButtonText: '取消',
         type: 'warning'

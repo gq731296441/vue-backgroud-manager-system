@@ -16,20 +16,6 @@ function param2Obj (url) {
   )
 }
 
-// function body2Obj (body) {
-//   const search = body.split(':')[1]
-//   if (!search) {
-//     return {}
-//   }
-//   return JSON.parse(
-//     '{"' +
-//     decodeURIComponent(search)
-//       .replace(/"/g, '\\"')
-//       .replace(/&/g, '","')
-//       .replace(/=/g, '":"') +
-//     '"}'
-//   )
-// }
 
 let List = []
 const count = 200
@@ -46,6 +32,7 @@ for (let i = 0; i < count; i++) {
     })
   )
 }
+
 
 export default {
   /**

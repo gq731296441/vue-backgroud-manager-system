@@ -295,7 +295,7 @@ export default {
            width: 115px;
            height: 35px;
            text-align: center;
-           border-radius: 0 35px 0 35px;
+           border-radius: 10px 35px 10px 35px;
             background-color: #409EFF;
          
            
