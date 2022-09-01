@@ -20,3 +20,7 @@ Mock.mock(/user\/del/, 'get', userApi.deleteUser)
 
 // 拦截登录的请求，返回对应的菜单和token
 Mock.mock(/permisson\/getMenu/, 'post', permissonApi.getMenu)
+
+Mock.mock(/permisson\/getCode/, 'get', permissonApi.getCode)
+
+Mock.mock(/permisson\/loginByPhone/, 'post', permissonApi.getMneu_phone)

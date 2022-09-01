@@ -22,6 +22,7 @@
         <el-card style="margin-top: 20px; height: 400px;">
             <el-table :data="tableData">
             <!-- 注意这里的v-for循环，循环的源数据是一个对象对象的每个属性都是一个键值对，val就表示值，key表示键 -->
+            
               <el-table-column 
                 v-for="(item, key) in tableLabel" 
                 :key="key"
