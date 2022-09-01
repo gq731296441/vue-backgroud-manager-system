@@ -39,7 +39,7 @@ export default {
             {
               path: '/mall',
               name: 'mall',
-              label: '商品管理',
+              label: '订单管理',
               icon: 'video-play',
               url: 'Mall/Mall'
             },
@@ -90,7 +90,7 @@ export default {
             {
               path: '/mall',
               name: 'mall',
-              label: '商品管理',
+              label: '订单管理',
               icon: 'video-play',
               url: 'Mall/Mall'
             }

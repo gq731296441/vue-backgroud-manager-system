@@ -4,7 +4,7 @@
     <el-table
         :data="tableData"
         style="width: 100%;"
-        height="250"
+        height="75vh"
         stripe
     >
         <slot></slot>
@@ -90,7 +90,7 @@ export default {
 <style lang="less" scoped>
 .common-table {
     // height: 90vh;
-    height: 100vh;
+    // height: 800px;
     background-color: #fff;
     position: relative;
     

@@ -56,6 +56,8 @@ for (let i = 0; i < count; i++) {
       })
     )
 }
+let a = Mock.mock({"goodsStar|4": "★",})
 
 // 输出结果
- console.log(goodsList);
+//  console.log(goodsList);
+console.log(a);

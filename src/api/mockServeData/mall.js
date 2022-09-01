@@ -21,7 +21,9 @@ var random = Mock.Random;
 //扩展数据模板
 random.extend({
   goodsname: function (date) {
-    var goods = ['oppo', 'vivo', '苹果', '小米', '三星', '魅族', '一加', '联想']
+    var goods = ['oppo', 'vivo', 'iphone6','iphone7',
+      'iphone8','iphone11','iphone13','iphone13proMax',
+       '小米note10','小米note11','小米note12', '三星', '魅族', '一加', '联想']
     return this.pick(goods)
  }
 })
@@ -85,14 +87,17 @@ export default {
   createGoods: config => {
     console.log(config);
     const { goodsName, goodsCount, goodsSale, goodsStar, goodsAddress } = JSON.parse(config.body)
-    console.log(JSON.parse(config.body))
+    let stars = ''
+    for (let i = 1; i <= goodsStar; i++) {
+      stars += '★'
+    }
     goodsList.unshift({
       goodsId: Mock.Random.guid(),
       goodsImg: Mock.mock("@Image('100x100','@color','phone')"),
       goodsName: goodsName,
       goodsCount: goodsCount,
       goodsSale: goodsSale,
-      goodsStar: goodsStar,
+      goodsStar: stars,
       goodsAddress: goodsAddress,
     })
     return {
@@ -148,16 +153,21 @@ export default {
   updateGoods: config => {
     // console.log(config);
     const { goodsId, goodsName, goodsCount, goodsSale, goodsStar, goodsAddress } = JSON.parse(config.body)
+    let stars = ''
+    for (let i = 1; i <= goodsStar; i++) {
+      stars += '★'
+    }
     goodsList.some(u => {
       if (u.goodsId === goodsId) {
         u.goodsName = goodsName
         u.goodsCount = goodsCount
         u.goodsSale = goodsSale
-        u.goodsStar = goodsStar
+        u.goodsStar = stars
         u.goodsAddress = goodsAddress
         return true
       }
     })
+  
     return {
       code: 20000,
       data: {

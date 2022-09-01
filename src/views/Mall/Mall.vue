@@ -2,7 +2,7 @@
   <div class="mall_manager">
       <el-dialog
         :visible.sync="isShow"
-        :title="operateType === 'add' ? '新增商品' : '编辑商品'"
+        :title="operateType === 'add' ? '新增订单' : '编辑订单'"
       >
         <CommonForm
           :label="goodsOperateLabel"
@@ -18,7 +18,7 @@
       </el-dialog>
 
       <div class="manager_header">
-        <el-button type="primary" @click="addGoods">+新增商品</el-button>
+        <el-button type="primary" @click="addGoods">+新增订单</el-button>
 
           <CommonForm
           :label="serachLabel"
@@ -67,46 +67,46 @@ export default {
       goodsTabelLabel: [
         {
           prop: 'goodsName',
-          label: '商品名称',
+          label: '订单名称',
           width: 200
         },
         {
           prop: 'goodsCount',
-          label: '商品库存'
+          label: '商品库存(件)'
         },
         {
           prop: 'goodsSale',
-          label: '商品价格'
+          label: '订单价格(元)'
         },
         {
           prop: 'goodsStar',
-          label: '商品评价'
+          label: '订单评分'
         },
         {
           prop: 'goodsAddress',
-          label: '商品生产地址',
+          label: '订单地址',
           width: 300
         }
       ],
       goodsOperateLabel: [
         {
           model: 'goodsName',
-          label: '商品名称',
+          label: '订单名称',
           type: 'input',
         },
         {
           model: 'goodsCount',
-          label: '商品库存',
+          label: '商品库存(件)',
           type: 'input'
         },
         {
           model: 'goodsSale',
-          label: '商品售价',
+          label: '订单价格(元)',
           type: 'input'
         },
         {
           model: 'goodsStar',
-          label: '商品评分',
+          label: '订单评分',
           type: 'select',
           opts: [
             {
@@ -133,7 +133,7 @@ export default {
         },
         {
           model: 'goodsAddress',
-          label: '商品生产地址',
+          label: '订单地址',
           type: 'input'
         }
       ],
@@ -173,6 +173,7 @@ export default {
           this.getGoodsList()
         })
       }else if (this.operateType === 'edit') {
+        console.log(this.goodsOperateData);
         this.$http.post('mall/editGoods', this.goodsOperateData).then(() => {
           this.isShow = false
           this.getGoodsList()
@@ -185,6 +186,14 @@ export default {
     },
     addGoods() {
       this.isShow = true
+      this.operateType = 'add'
+      this.goodsOperateData = {
+        goodsName: '',
+        goodsCount: '',
+        goodsSale: '',
+        goodsStar: '',
+        goodsAddress: ''
+      }
     },
     search() {
       this.getGoodsList(this.searchData.keyword)
