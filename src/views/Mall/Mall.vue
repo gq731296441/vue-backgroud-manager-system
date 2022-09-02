@@ -18,7 +18,7 @@
       </el-dialog>
 
       <div class="manager_header">
-        <el-button type="primary" @click="addGoods">+新增订单</el-button>
+        <el-button type="primary" @click="addGoods">+ 新增</el-button>
 
           <CommonForm
           :label="serachLabel"
@@ -67,7 +67,7 @@ export default {
       goodsTabelLabel: [
         {
           prop: 'goodsName',
-          label: '订单名称',
+          label: '商品名称',
           width: 100
         },
         {
@@ -76,11 +76,11 @@ export default {
         },
         {
           prop: 'goodsSale',
-          label: '订单价格(元)'
+          label: '商品价格(元)'
         },
         {
           prop: 'goodsStar',
-          label: '订单评分'
+          label: '商品评分'
         },
         {
           prop: 'goodsAddress',
@@ -91,7 +91,7 @@ export default {
       goodsOperateLabel: [
         {
           model: 'goodsName',
-          label: '订单名称',
+          label: '商品名称',
           type: 'input',
         },
         {
@@ -101,12 +101,12 @@ export default {
         },
         {
           model: 'goodsSale',
-          label: '订单价格(元)',
+          label: '商品价格(元)',
           type: 'input'
         },
         {
           model: 'goodsStar',
-          label: '订单评分',
+          label: '商品评分',
           type: 'select',
           opts: [
             {
